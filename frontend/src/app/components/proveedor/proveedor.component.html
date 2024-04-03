@@ -1,0 +1,173 @@
+<nav class="navbar navbar-dark bg-dark">
+  <a href="/navegacion" class="navbar-brand">REGISTRO DE Proveedor</a>
+</nav>
+
+<div class="agregar_contenedor"></div>
+<div class="row mt-5">
+  <div class="card">
+    <div class="card-body">
+      <form
+        id="formulario"
+        name="formulario"
+        #f="ngForm"
+        (ngSubmit)="AgregarValor()"
+        novalidate
+      >
+        <div class="form-group">
+          <option>Seleccione la Empresa</option>
+          <select
+            class="form-control"
+            size="1"
+            [(ngModel)]="user.idempresa"
+            name="idempresa"
+            required
+          >
+            <option
+              *ngFor="let lista of Empresalist"
+              value="{{ lista.idempresa }}"
+            >
+              {{ lista.nombre }}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="" class="control-label">Proveedor</label>
+          <input
+            type="text"
+            [(ngModel)]="user.proveedor"
+            name="proveedor"
+            placeholder="DIGITE EL PROVEEDOR"
+            class="form-control"
+            autofocus
+          />
+        </div>
+        <div class="form-group">
+          <label for="" class="control-label">Direccion</label>
+          <input
+            type="text"
+            [(ngModel)]="user.direccion"
+            name="direccion"
+            placeholder="DIGITE LA DIRECCION"
+            class="form-control"
+            autofocus
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="" class="control-label">Telefono</label>
+          <input
+            type="text"
+            [(ngModel)]="user.telefono"
+            name="telefono"
+            placeholder="DIGITE EL TELEFONO"
+            class="form-control"
+            autofocus
+          />
+        </div>
+        <div class="form-group">
+          <label for="" class="control-label">Responsable</label>
+          <input
+            type="text"
+            [(ngModel)]="user.responsable"
+            name="responsable"
+            placeholder="DIGITE EL RESPONSABLE"
+            class="form-control"
+            autofocus
+          />
+        </div>
+        <div class="form-group">
+          <label for="" class="control-label">Fecha Creacion</label>
+          <input
+            type="date"
+            [(ngModel)]="user.fecha_creacion"
+            name="fecha_creacion"
+            placeholder="Seleccione la Fecha"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <label for="" class="control-label">Observaciones</label>
+          <input
+            type="text"
+            [(ngModel)]="user.observaciones"
+            name="observaciones"
+            placeholder="DIGITE LAS OBSERVACIONES"
+            class="form-control"
+          />
+        </div>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          formnovalidate
+          value="Save"
+          onclick="javascript:alert('Registro Almacenado')"
+        >
+          Agregar
+        </button>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            name="filterPost"
+            placeholder="Digite la Empresa que desea Buscar"
+            [(ngModel)]="filterPost"
+          />
+        </div>
+        &nbsp;&nbsp; <button class="btn btn-dark" (click)="openPDF()">Descargar PDF</button>`
+        <button (click)="exportToExcel()" class="btn btn-secondary">Exportar a Excel</button>
+      </form>
+    </div>
+  </div>
+</div>
+<br />
+<div class="container">
+  <div class="row mt-25">
+    <table class="table table-borbered table-hover" id="tabla">
+      <thead>
+        <tr>
+          <th>NO</th>
+          <th>EMPRESA</th>
+          <th>PROVEEDOR</th>
+          <th></th>
+          <th>DIRECCION</th>
+          <th>TELEFONO</th>
+          <th>RESPONSABLE</th>
+          <th>FECHA CREACION</th>
+          <th>OBSERVACIONES</th>
+          <th>ESTADO</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let User of TUser | filterproveedor:filterPost">
+          <td>{{ User.idprov }}</td>
+          <td>{{ User.nombre }}</td>
+          <td>{{ User.proveedor }}</td>
+          <td style="visibility: hidden" >{{ User.idempresa }}</td>
+          <td>{{ User.direccion }}</td>
+          <td>{{ User.telefono }}</td>
+          <td>{{ User.responsable }}</td>
+          <td>{{ dateUtilService.formatearFecha(User.fecha_creacion) }}</td>
+          <td>{{ User.observaciones }}</td>
+          <td>{{ User.estado }}</td>
+          <td>
+            <button
+              class="btn btn-danger"
+              (click)="EliminarData(User.idprov)"
+              onclick="javascript:alert('Registro Eliminado')"
+            >
+              Eliminar
+            </button>
+          </td>
+          <td>
+            <button
+              class="btn btn-success"
+              [routerLink]="['/proveedor/edit', User.idprov]"
+            >
+              Actualizar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

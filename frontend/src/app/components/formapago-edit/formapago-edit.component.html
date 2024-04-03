@@ -1,0 +1,53 @@
+<nav class="navbar navbar-dark bg-dark">
+  <a href="/" class="navbar-brand">FORMA PAGO</a>
+</nav>
+
+<div class="row mt-5">
+  <div class="card">
+    <div class="card-body">
+      <form action="">
+        <div class="form-group">
+          <label for="" class="control-label" hidden>Registro No.</label>
+          <input
+            type="text"
+            readonly="readonly"
+            [(ngModel)]="user.idfpago"
+            name="idfpago"
+            placeholder="No"
+            class="form-control"
+            required
+            hidden
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="" class="control-label">No Empresa</label>
+          <input
+            type="text"
+            [(ngModel)]="user.idempresa"
+            name="idempresa"
+            class="form-control"
+            autofocus
+          />
+        </div>
+        <div class="form-group">
+          <label for="" class="control-label">Forma Pago</label>
+          <input
+            type="text"
+            [(ngModel)]="user.formapago"
+            name="formapago"
+            class="form-control"
+            autofocus
+          />
+        </div>
+        <button
+          class="btn btn-success btn-block"
+          (click)="updateUser()"
+          onclick="javascript:alert('Registro Actualizado')"
+        >
+          Actualizar
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

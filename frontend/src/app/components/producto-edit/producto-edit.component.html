@@ -1,0 +1,144 @@
+<nav class="navbar navbar-dark bg-dark">
+  <a href="/" class="navbar-brand">PRODUCTO</a>
+</nav>
+
+<div class="row mt-5">
+  <div class="card">
+    <div class="card-body">
+      <form action="">
+        <div class="form-group">
+          <label for="" class="control-label" hidden>Registro No.</label>
+          <input
+            type="text"
+            readonly="readonly"
+            [(ngModel)]="user.num_prod"
+            name="num_prod"
+            placeholder="No"
+            class="form-control"
+            required
+            hidden
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="" class="control-label">Empresa</label>
+          <input
+            type="text"
+            [(ngModel)]="user.idempresa"
+            name="idempresa"
+            placeholder="DIGITE LA EMPRESA"
+            class="form-control"
+            autofocus
+          />
+        </div>
+        <div class="form-group">
+          <label for="" class="control-label">Sucursal</label>
+          <input
+            type="text"
+            [(ngModel)]="user.idsuc"
+            name="idsuc"
+            placeholder="DIGITE LA SUCURSAL"
+            class="form-control"
+            autofocus
+          />
+        </div>
+        <div class="form-group">
+          <label for="" class="control-label">Tipo Producto</label>
+          <input
+            type="text"
+            [(ngModel)]="user.idtpprod"
+            name="tproducto"
+            placeholder="DIGITE EL TIPO PRODUCTO"
+            class="form-control"
+            autofocus
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="" class="control-label">Descripcion</label>
+          <input
+            type="text"
+            [(ngModel)]="user.descripcion"
+            name="descripcion"
+            placeholder="DIGITE LA DESCRIPCION"
+            class="form-control"
+            autofocus
+          />
+        </div>
+        <div class="form-group">
+          <label for="" class="control-label">Marca</label>
+          <input
+            type="text"
+            [(ngModel)]="user.marca"
+            name="marca"
+            placeholder="DIGITE LA MARCA"
+            class="form-control"
+            autofocus
+          />
+        </div>
+        <div class="form-group">
+          <label for="" class="control-label">Valor</label>
+          <input
+            type="text"
+            [(ngModel)]="user.valor"
+            name="valor"
+            placeholder="DIGITE EL VALOR"
+            class="form-control"
+            autofocus
+          />
+        </div>
+        <div class="form-group">
+          <label for="" class="control-label">Precio Venta</label>
+          <input
+            type="text"
+            [(ngModel)]="user.precioventa"
+            name="pventa"
+            placeholder="DIGITE EL PRECIO VENTA"
+            class="form-control"
+            autofocus
+          />
+        </div>
+        <div class="form-group">
+          <label for="" class="control-label">Existencia</label>
+          <input
+            type="text"
+            [(ngModel)]="user.existencia"
+            name="existencia"
+            placeholder="DIGITE EL EXISTENCIA"
+            class="form-control"
+            autofocus
+          />
+        </div>
+        <div class="form-group">
+          <label for="" class="control-label">Fecha Ingreso</label>
+          <input
+            type="date"
+            [(ngModel)]="user.fecha_ingreso"
+            name="fecha_ingreso"
+            placeholder="DIGITE LA FECHA INGRESO"
+            class="form-control"
+            autofocus
+          />
+        </div>
+        <div class="form-group">
+          <label for="" class="control-label">Fecha Actualizado</label>
+          <input
+            type="date"
+            [(ngModel)]="user.fecha_actualiza"
+            name="fecha_actualiza"
+            placeholder="DIGITE LA FECHA ACTUALIZADO"
+            class="form-control"
+            autofocus
+          />
+        </div>
+        <button
+          class="btn btn-success btn-block"
+          (click)="updateUser()"
+          onclick="javascript:alert('Registro Actualizado')"
+        >
+          Actualizar
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

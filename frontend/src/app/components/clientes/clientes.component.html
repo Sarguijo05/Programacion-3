@@ -1,0 +1,211 @@
+<nav class="navbar navbar-dark bg-dark">
+  <a href="/navegacion" class="navbar-brand">REGISTRO DE CLIENTES</a>
+</nav>
+
+<div class="agregar_contenedor"></div>
+<div class="row mt-5">
+  <div class="card">
+    <div class="card-body">
+      <form
+        id="formulario"
+        name="formulario"
+        #f="ngForm"
+        (ngSubmit)="AgregarValor()"
+        novalidate
+      >
+        <div class="form-group">
+          <option>Seleccione la Empresa</option>
+          <select
+            class="form-control"
+            size="1"
+            [(ngModel)]="user.idempresa"
+            name="idempresa"
+            required
+          >
+            <option
+              *ngFor="let lista of Empresalist"
+              value="{{ lista.idempresa }}"
+            >
+              {{ lista.nombre }}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <option>Seleccione la Sucursal</option>
+          <select
+            class="form-control"
+            size="1"
+            [(ngModel)]="user.idsuc"
+            name="idsuc"
+            required
+          >
+            <option
+              *ngFor="let lista of Sucursaleslist"
+              value="{{ lista.idsuc }}"
+            >
+              {{ lista.sucursal }}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="" class="control-label">Identidad</label>
+          <input
+            type="text"
+            [(ngModel)]="user.identidad"
+            name="telefono"
+            placeholder="DIGITE EL IDENTIDAD"
+            class="form-control"
+            autofocus
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="" class="control-label">RTN</label>
+          <input
+            type="text"
+            [(ngModel)]="user.rtn"
+            name="correo"
+            placeholder="DIGITE EL RTN"
+            class="form-control"
+            autofocus
+          />
+        </div>
+        <div class="form-group">
+          <label for="" class="control-label">Nombre</label>
+          <input
+            type="text"
+            [(ngModel)]="user.nombre"
+            name="nombre"
+            placeholder="DIGITE EL Nombre"
+            class="form-control"
+            autofocus
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="" class="control-label">Telefono</label>
+          <input
+            type="text"
+            [(ngModel)]="user.telefono"
+            name="telefono"
+            placeholder="DIGITE EL TELEFONO"
+            class="form-control"
+            autofocus
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="" class="control-label">Direccion</label>
+          <input
+            type="text"
+            [(ngModel)]="user.direccion"
+            name="direccion"
+            placeholder="DIGITE LA DIRECCION"
+            class="form-control"
+            autofocus
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="" class="control-label">Correo</label>
+          <input
+            type="text"
+            [(ngModel)]="user.correo"
+            name="correo"
+            placeholder="DIGITE EL CORREO"
+            class="form-control"
+            autofocus
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="" class="control-label">Fecha Creacion</label>
+          <input
+            type="date"
+            [(ngModel)]="user.fecha_creacion"
+            name="fecha_creacion"
+            placeholder="Seleccione la Fecha"
+            class="form-control"
+          />
+        </div>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          formnovalidate
+          value="Save"
+          onclick="javascript:alert('Registro Almacenado')"
+        >
+          Agregar
+        </button>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            name="filterPost"
+            placeholder="Digite el cliente a buscar"
+            [(ngModel)]="filterPost"
+          />
+        </div>
+        &nbsp;&nbsp; <button class="btn btn-dark" (click)="openPDF()">Descargar PDF</button>
+        <button (click)="exportToExcel()" class="btn btn-secondary">Exportar a Excel</button>
+      </form>
+    </div>
+  </div>
+</div>
+<br />
+
+<div class="container">
+  <div class="row mt-25">
+    <table class="table table-borbered table-hover" id="tabla">
+      <thead>
+        <tr>
+          <th>NO</th>
+          <th>EMPRESA</th>
+          <th>SUCURSAL</th>
+          <th>IDENTIDAD</th>
+          <th>RTN</th>
+          <th>FECHA NACIMIENTO</th>
+          <th>NOMBRE</th>
+          <th>TELEFONO</th>
+          <th>DIRECCION</th>
+          <th>CORREO</th>
+          <th>FECHA CREACION</th>
+          <th>ESTADO</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let User of TUser | filterclientes:filterPost">
+          <td>{{ User.num_clie }}</td>
+          <td>{{ User.nombre_empresa }}</td>
+          <td>{{ User.sucursal }}</td>
+          <td>{{ User.identidad }}</td>
+          <td>{{ User.rtn }}</td>
+          <td>{{ dateUtilService.formatearFecha(User.fecha_nac) }}</td>
+          <td>{{ User.nombre }}</td>
+          <td>{{ User.telefono }}</td>
+          <td>{{ User.direccion }}</td>
+          <td>{{ User.correo }}</td>
+          <td>{{ dateUtilService.formatearFecha(User.fecha_creacion) }}</td>
+          <td>{{ User.estado }}</td>
+          <td>
+            <button
+              class="btn btn-danger"
+              (click)="EliminarData(User.num_clie)"
+              onclick="javascript:alert('Registro Eliminado')"
+            >
+              Eliminar
+            </button>
+          </td>
+          <td>
+            <button
+              class="btn btn-success"
+              [routerLink]="['/clientes/edit', User.num_clie]"
+            >
+              Actualizar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

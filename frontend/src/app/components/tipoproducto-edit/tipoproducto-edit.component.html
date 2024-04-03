@@ -1,0 +1,55 @@
+<nav class="navbar navbar-dark bg-dark">
+  <a href="/" class="navbar-brand">TIPO PRODUCTO</a>
+</nav>
+
+<div class="row mt-5">
+  <div class="card">
+    <div class="card-body">
+      <form action="">
+        <div class="form-group">
+          <label for="" class="control-label" hidden>Registro No.</label>
+          <input
+            type="text"
+            readonly="readonly"
+            [(ngModel)]="user.idtpprod"
+            name="idtpprod"
+            placeholder="No"
+            class="form-control"
+            required
+            hidden
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="" class="control-label">Empresa</label>
+          <input
+            type="text"
+            [(ngModel)]="user.idempresa"
+            name="idempresa"
+            class="form-control"
+            autofocus
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="" class="control-label">Tipo</label>
+          <input
+            type="text"
+            [(ngModel)]="user.tipo"
+            name="tipo"
+            class="form-control"
+            autofocus
+          />
+        </div>
+
+        <button
+          class="btn btn-success btn-block"
+          (click)="updateUser()"
+          onclick="javascript:alert('Registro Actualizado')"
+        >
+          Actualizar
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
