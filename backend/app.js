@@ -44,7 +44,7 @@ app.use(
     {
       host: "localhost",
       user: "root",
-      password: "Sbashy05!",
+      password: "admin",
       port: 3306,
       database: "ventas",
     },

@@ -1,0 +1,121 @@
+<nav class="navbar navbar-dark bg-dark">
+  <a href="/navegacion" class="navbar-brand">REGISTRO DE TIPO DE PRODUCTO</a>
+</nav>
+
+<div class="agregar_contenedor"></div>
+<div class="row mt-5">
+  <div class="card">
+    <div class="card-body">
+      <form
+        id="formulario"
+        name="formulario"
+        #f="ngForm"
+        (ngSubmit)="AgregarValor()"
+        novalidate
+      >
+        <div class="form-group">
+          <label for="" class="control-label" hidden>Registro No.</label>
+          <input
+            type="text"
+            readonly="readonly"
+            [(ngModel)]="user.idempresa"
+            name="idempresa"
+            placeholder="No"
+            class="form-control"
+            required
+            hidden
+          />
+        </div>
+
+        <div class="form-group">
+          <option>Seleccione la Empresa</option>
+          <select
+            class="form-control"
+            size="1"
+            [(ngModel)]="user.idempresa"
+            name="idempresa"
+            required
+          >
+            <option
+              *ngFor="let lista of Empresalist"
+              value="{{ lista.idempresa }}"
+            >
+              {{ lista.nombre }}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="" class="control-label">Tipo</label>
+          <input
+            type="text"
+            [(ngModel)]="user.tipo"
+            name="tipo"
+            placeholder="DIGITE EL TIPO"
+            class="form-control"
+            autofocus
+          />
+        </div>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          formnovalidate
+          value="Save"
+          onclick="javascript:alert('Registro Almacenado')"
+        >
+          Agregar
+        </button>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            name="filterPost"
+            placeholder="Digite la Empresa que desea Buscar"
+            [(ngModel)]="filterPost"
+          />
+        </div>
+        &nbsp;&nbsp; <button class="btn btn-dark" (click)="openPDF()">Descargar PDF</button>`
+        <button (click)="exportToExcel()" class="btn btn-secondary">Exportar a Excel</button>
+      </form>
+    </div>
+  </div>
+</div>
+<br />
+
+<div class="container">
+  <div class="row mt-25">
+    <table class="table table-borbered table-hover" id="tabla">
+      <thead>
+        <tr>
+          <th>NO</th>
+          <th>EMPRESA</th>
+          <th>TIPO</th>
+          <th>ESTADO</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let User of TUser | filtertipoproducto:filterPost">
+          <td>{{ User.idtpprod }}</td>
+          <td>{{ User.nombre_empresa }}</td>
+          <td>{{ User.tipo }}</td>
+          <td>
+            <button
+              class="btn btn-danger"
+              (click)="EliminarData(User.idtpprod)"
+              onclick="javascript:alert('Registro Eliminado')"
+            >
+              Eliminar
+            </button>
+          </td>
+          <td>
+            <button
+              class="btn btn-success"
+              [routerLink]="['/tipoproducto/edit', User.idtpprod]"
+            >
+              Actualizar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

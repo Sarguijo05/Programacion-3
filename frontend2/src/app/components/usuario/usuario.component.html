@@ -1,0 +1,192 @@
+<nav class="navbar navbar-dark bg-dark">
+  <a href="/navegacion" class="navbar-brand">REGISTRO DE USUARIO</a>
+</nav>
+
+<div class="agregar_contenedor"></div>
+<div class="row mt-5">
+  <div class="card">
+    <div class="card-body">
+      <form
+        id="formulario"
+        name="formulario"
+        #f="ngForm"
+        (ngSubmit)="AgregarValor()"
+        novalidate
+      >
+        <div class="form-group">
+          <option>Seleccione la Empresa</option>
+          <select
+            class="form-control"
+            size="1"
+            [(ngModel)]="user.idempresa"
+            name="idempresa"
+            required
+          >
+            <option
+              *ngFor="let lista of Empresalist"
+              value="{{ lista.idempresa }}"
+            >
+              {{ lista.nombre }}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <option>Seleccione la Sucursal</option>
+          <select
+            class="form-control"
+            size="1"
+            [(ngModel)]="user.idsuc"
+            name="idsuc"
+            required
+          >
+            <option
+              *ngFor="let lista of Sucursaleslist"
+              value="{{ lista.idsuc }}"
+            >
+              {{ lista.sucursal }}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <option>Seleccione el Tipo usuario</option>
+          <select
+            class="form-control"
+            size="1"
+            [(ngModel)]="user.idtpusuario"
+            name="idtpusuario"
+            required
+          >
+            <option
+              *ngFor="let lista of TipoUsuariolist"
+              value="{{ lista.idtpusuario }}"
+            >
+              {{ lista.tipo }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <option>Seleccione el Empleado</option>
+          <select
+            class="form-control"
+            size="1"
+            [(ngModel)]="user.idemp"
+            name="idemp"
+            required
+          >
+            <option
+              *ngFor="let lista of EmpleadoList"
+              value="{{ lista.idemp }}"
+            >
+              {{ lista.nombres }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="" class="control-label">Usuario</label>
+          <input
+            type="text"
+            [(ngModel)]="user.usuario"
+            name="usuario"
+            placeholder="DIGITE EL USUARIO"
+            class="form-control"
+            autofocus
+          />
+        </div>
+        <div class="form-group">
+          <label for="" class="control-label">Clave</label>
+          <input
+            type="text"
+            [(ngModel)]="user.clave"
+            name="clave"
+            placeholder="DIGITE LA CLAVE"
+            class="form-control"
+            autofocus
+          />
+        </div>
+        <div class="form-group">
+          <label for="" class="control-label">Tipo</label>
+          <input
+            type="text"
+            [(ngModel)]="user.tipo"
+            name="tipo"
+            placeholder="TIPO"
+            class="form-control"
+          />
+        </div>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          formnovalidate
+          value="Save"
+          onclick="javascript:alert('Registro Almacenado')"
+        >
+          Agregar
+        </button>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            name="filterPost"
+            placeholder="Digite la Empresa que desea Buscar"
+            [(ngModel)]="filterPost"
+          />
+        </div>
+        &nbsp;&nbsp; <button class="btn btn-dark" (click)="openPDF()">Descargar PDF</button>
+        <button (click)="exportToExcel()" class="btn btn-secondary">Exportar a Excel</button>
+      </form>
+    </div>
+  </div>
+</div>
+<br />
+
+<div class="container">
+  <div class="row mt-25">
+    <table class="table table-borbered table-hover" id="tabla">
+      <thead>
+        <tr>
+          <th>NO</th>
+          <th>EMPRESA</th>
+          <th>SUCURSAL</th>
+          <th>TIPOUSUARIO</th>
+          <th>EMPLEADOS</th>
+          <th>USUARIO</th>
+          <th>CLAVE</th>
+          <th>TIPO</th>
+          <th>ESTADO</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let User of TUser | filterusuario:filterPost">
+          <td>{{ User.userid }}</td>
+          <td>{{ User.nombre_empresa }}</td>
+          <td>{{ User.sucursal }}</td>
+          <td>{{ User.tipo }}</td>
+          <td>{{ User.nombres }}</td>
+          <td>{{ User.usuario }}</td>
+          <td>{{ User.clave }}</td>
+          <td>{{ User.tipo }}</td>
+          <td>{{ User.estado }}</td>
+          <td>
+            <button
+              class="btn btn-danger"
+              (click)="EliminarData(User.userid)"
+              onclick="javascript:alert('Registro Eliminado')"
+            >
+              Eliminar
+            </button>
+          </td>
+          <td>
+            <button
+              class="btn btn-success"
+              [routerLink]="['/usuario/edit', User.userid]"
+            >
+              Actualizar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

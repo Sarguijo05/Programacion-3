@@ -1,0 +1,236 @@
+<nav class="navbar navbar-dark bg-dark">
+  <a href="/navegacion" class="navbar-brand">REGISTRO DE EMPLEADOS</a>
+</nav>
+
+<div class="agregar_contenedor"></div>
+<div class="row mt-5">
+  <div class="card">
+    <div class="card-body">
+      <form
+        id="formulario"
+        name="formulario"
+        #f="ngForm"
+        (ngSubmit)="AgregarValor()"
+        novalidate
+      >
+        <div class="form-group">
+          <option>Seleccione la Empresa</option>
+          <select
+            class="form-control"
+            size="1"
+            [(ngModel)]="user.idempresa"
+            name="idempresa"
+            required
+          >
+            <option
+              *ngFor="let lista of Empresalist"
+              value="{{ lista.idempresa }}"
+            >
+              {{ lista.nombre }}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <option>Seleccione la Sucursal</option>
+          <select
+            class="form-control"
+            size="1"
+            [(ngModel)]="user.idsuc"
+            name="idsuc"
+            required
+          >
+            <option
+              *ngFor="let lista of Sucursaleslist"
+              value="{{ lista.idsuc }}"
+            >
+              {{ lista.sucursal }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <option>Seleccione el Area</option>
+          <select
+            class="form-control"
+            size="1"
+            [(ngModel)]="user.idarea"
+            name="idarea"
+            required
+          >
+            <option *ngFor="let lista of Arealist" value="{{ lista.idarea }}">
+              {{ lista.area }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="" class="control-label">Identidad</label>
+          <input
+            type="text"
+            [(ngModel)]="user.identidad"
+            name="identidad"
+            placeholder="DIGITE LA IDENTIDAD"
+            class="form-control"
+            autofocus
+          />
+        </div>
+        <div class="form-group">
+          <label for="" class="control-label">Fecha Nacimiento</label>
+          <input
+            type="date"
+            [(ngModel)]="user.fecha_nac"
+            name="nacimiento"
+            placeholder="DIGITE LA FECHA NACIMIENTO"
+            class="form-control"
+            autofocus
+          />
+        </div>
+        <div class="form-group">
+          <label for="" class="control-label">Nombres</label>
+          <input
+            type="text"
+            [(ngModel)]="user.nombres"
+            name="nombres"
+            placeholder="DIGITE LOS NOMBRES"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <label for="" class="control-label">Apelllidos</label>
+          <input
+            type="text"
+            [(ngModel)]="user.apellidos"
+            name="apellidos"
+            placeholder="DIGITE LOS APELLIDOS"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <label for="" class="control-label">Genero</label>
+          <input
+            type="text"
+            [(ngModel)]="user.genero"
+            name="genero"
+            placeholder="DIGITE EL GENERO"
+            class="form-control"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="" class="control-label">Estado Civil</label>
+          <input
+            type="text"
+            [(ngModel)]="user.estado_civil"
+            name="estado_civil"
+            placeholder="DIGITE EL ESTADO CIVIL"
+            class="form-control"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="" class="control-label">Direccion</label>
+          <input
+            type="text"
+            [(ngModel)]="user.direccion"
+            name="direccion"
+            placeholder="DIGITE LA DIRECCION"
+            class="form-control"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="" class="control-label">Fecha Creacion</label>
+          <input
+            type="date"
+            [(ngModel)]="user.fecha_creacion"
+            name="fecha_creacion"
+            placeholder="DIGITE LA FECHA CREACION"
+            class="form-control"
+          />
+        </div>
+
+        <button
+          type="submit"
+          class="btn btn-primary"
+          formnovalidate
+          value="Save"
+          onclick="javascript:alert('Registro Almacenado')"
+        >
+          Agregar
+        </button>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            name="filterPost"
+            placeholder="Digite el Empleado"
+            [(ngModel)]="filterPost"
+          />
+        </div>
+        &nbsp;&nbsp; <button class="btn btn-dark" (click)="openPDF()">Descargar PDF</button>`
+        <button (click)="exportToExcel()" class="btn btn-secondary">
+          Exportar a Excel
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+<br />
+
+<div class="container">
+  <div class="row mt-25">
+    <table class="table table-borbered table-hover" id="tabla">
+      <thead>
+        <tr>
+          <th>NO</th>
+          <th>EMPRESA</th>
+          <th>SUCURSAL</th>
+          <th>AREA</th>
+          <th>IDENTIDAD</th>
+          <th>FECHA NACIMIENTO</th>
+          <th>NOMBRES</th>
+          <th>APELLIDOS</th>
+          <th>GENERO</th>
+          <th>ESTADO CIVIL</th>
+          <th>DIRECCION</th>
+          <th>FECHA CREACION</th>
+          <th>ESTADO</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let User of TUser | filterempleados : filterPost">
+          <td>{{ User.idemp }}</td>
+          <td>{{ User.nombre_empresa }}</td>
+          <td>{{ User.sucursal }}</td>
+          <td>{{ User.area }}</td>
+          <td>{{ User.identidad }}</td>
+          <td>{{ dateUtilService.formatearFecha(User.fecha_nac) }}</td>
+          <td>{{ User.nombres }}</td>
+          <td>{{ User.apellidos }}</td>
+          <td>{{ User.genero }}</td>
+          <td>{{ User.estado_civil }}</td>
+          <td>{{ User.direccion }}</td>
+          <td>{{ dateUtilService.formatearFecha(User.fecha_creacion) }}</td>
+          <td>{{ User.estado }}</td>
+          <td>
+            <button
+              class="btn btn-danger"
+              (click)="EliminarData(User.idemp)"
+              onclick="javascript:alert('Registro Eliminado')"
+            >
+              Eliminar
+            </button>
+          </td>
+          <td>
+            <button
+              class="btn btn-success"
+              [routerLink]="['/empleados/edit', User.idemp]"
+            >
+              Actualizar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
